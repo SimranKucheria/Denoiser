@@ -13,10 +13,12 @@ A lot of people use services like Alexa, Siri and Google Assistant on a regular 
 
 Instead of increasing efficiency after the device has already translated what needs to be said, we take a more head on approach and filter the audio beforehand. We think that with the advancement of neural networks, we can feed common background noises (wind, airplanes, TV, animals) and effectively single out the primary speaker, separating them from these noises in their background. This is especially important in a place like India, where the population density does not allow for a lot of quiet atmosphere and a technology like this becomes a necessity. 
 
-Takes a head-on approach and denoises the input before services like alexa or deaf translators have to analyze them (hence making their job easier).
+Takes a head-on approach and denoises the input before services like alexa or speech to text translators have to analyze them (hence making their job easier).
 Higher likelihood of getting the desired output for the user.
 Faster output, as these services don’t have to use additional autocorrect like technologies to filter output if it's accurate in the first place. 
 Allows for people in dense living situations to use these services without a hassle.
 
-As our reliance on these services increases, we have to ensure that what we say is properly translated by them for us to be able to use them more effectively. Our proposal not only deals with this problem in the most efficient way possible, but also displays it in a way that makes fetching the output easier (though the use of a proper website). 
+As our reliance on these services increases, we have to ensure that what we say is properly translated by them for us to be able to use them more effectively.
+Our proposal not only deals with this problem in the most efficient way possible, but also displays it in a way that makes fetching the
+output easier (though the use of a proper website). 
 
