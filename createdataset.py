@@ -35,6 +35,7 @@ def _bytes_feature(value):
 def processingparellel(filepath):
     num=filepath.split('_')
     num=num[-1]
+    num=num[:-3]
     audio,sr=librosa.load(filepath,16000)  #Loads 16000 samples per second
     div_fac = 1 / np.max(np.abs(audio))    #For normalising audio
     audio = audio * div_fac / 3.0
@@ -98,7 +99,7 @@ def processingparellel(filepath):
 
     stftSegments = np.expand_dims(stftSegments, axis=3)
     clean_magnitude = np.expand_dims(clean_magnitude, axis=2)
-    tfrecord_filename = 'trainrecords' + num + '.tfrecords'
+    tfrecord_filename = 'trainrecords' + num + 'tfrecords'
     writer = tf.io.TFRecordWriter(tfrecord_filename) #Write spectograms to file
     for x_, y_, p_ in zip(stftSegments, clean_magnitude, noise_phase):
         y_ = np.expand_dims(y_, 2)
@@ -115,3 +116,5 @@ def processingparellel(filepath):
 
 p = multiprocessing.Pool(multiprocessing.cpu_count())
 p.map(processingparellel,train1files)
+
+//used same code with argument changes to create validation dataset
