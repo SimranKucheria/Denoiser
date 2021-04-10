@@ -4,4 +4,6 @@ flask
 pymongo
 passlib
 dnspython
-
+librosa
+ffmpeg
+SpeechRecognition
