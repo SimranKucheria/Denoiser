@@ -16,4 +16,3 @@ function drawBuffer( width, height, context, data ) {
         context.fillRect(i,(1+min)*amp,1,Math.max(1,(max-min)*amp));
     }
 }
-© 2021 GitHub, Inc.

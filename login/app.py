@@ -11,6 +11,7 @@ from subprocess import run, PIPE
 
 app = Flask(__name__)
 app.secret_key = "secret"
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 
 warnings.filterwarnings('ignore')
@@ -57,13 +58,20 @@ def login():
 def recorder():
     return render_template('recorder.html')
 
-@app.route('/audio', methods=['POST','GET'])
+
+@app.route('/audio', methods=['POST', 'GET'])
 def audio():
-	if request.method=='POST':
-		with open('/tmp/audio.wav', 'wb') as f:
-			f.write(request.data)
-		f.close()
-		return getcleanaudio(model=model, filename='/tmp/audio.wav')
+    if request.method == 'POST':
+        with open('/tmp/audio.wav', 'wb') as f:
+            f.write(request.data)
+        f.close()
+        x = getcleanaudio(model=model, filename='/tmp/audio.wav')
+        return play()
+
+
+@app.route('/play')
+def play():
+    return render_template('denoiseroutput.html')
 
 
 @app.route('/dashboard/')
@@ -71,8 +79,9 @@ def audio():
 def dashboard():
     return render_template('dashboard.html')
 
+
 if __name__ == "__main__":
-     print(("* Loading Keras model and Flask starting server..."
-            "please wait until server has fully started"))
-     load_keras_model()
-     app.run(host="127.0.0.1", port=5000)
+    print(("* Loading Keras model and Flask starting server..."
+           "please wait until server has fully started"))
+    load_keras_model()
+    app.run(host="127.0.0.1", port=5000, debug=True)
