@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd 
 import os
 import speech_recognition
+from scipy.io.wavfile import write
 
 def revert_features_to_audio(features, phase, cleanMean, cleanStd):
     features = cleanStd * features + cleanMean #Remove standardisation
@@ -20,7 +21,9 @@ def revert_features_to_audio(features, phase, cleanMean, cleanStd):
     features = np.transpose(features, (1, 0))
     return librosa.istft(features,win_length=256, hop_length=64, window=scipy.signal.hamming(256, sym=False), center=True)
     
-def getcleanaudio(model,inputaudio):
+def getcleanaudio(model,filename):
+	
+	inputaudio, sr = librosa.load(filename, 16000)
 	noise_stft_features = librosa.stft(inputaudio, n_fft=256, win_length=256, hop_length=64, window=scipy.signal.hamming(256, sym=False), center=True) #Get Spectogram from audio
 	noisyPhase = np.angle(noise_stft_features)
 
@@ -42,7 +45,9 @@ def getcleanaudio(model,inputaudio):
 	Pred = model.predict(predictors)
 	outputaud=revert_features_to_audio(Pred, noisyPhase, mean, std)
 	# Use speech recognition outputtext=
-	return outputaud
+	print("Processing done")
+	write('/tmp/cleaned.wav', 16000, outputaud)
+	return "/tmp/cleaned.wav"
 	
 	
 	    

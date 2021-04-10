@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <body>
+    <div class="container">
+        <audio controls>
+    <source src="{{ url_for('static', filename={{input}}) }}" type="file/mpeg">
+</audio>
+    </div>
+</body>
+
+</html>
+
+{% endblock %}
