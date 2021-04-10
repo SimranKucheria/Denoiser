@@ -1,4 +1,5 @@
 import pymongo
 
-client = pymongo.MongoClient('localhost', 27017)
-db = client.can_you_hear_me
+client = pymongo.MongoClient("mongodb+srv://Admin:dummypassword@cluster0.hxrmu.mongodb.net/Login?retryWrites=true&w=majority")
+db = client.Userlogin
+

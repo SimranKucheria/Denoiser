@@ -6,7 +6,7 @@ import uuid
 
 class User:
     def create_session(self, user):
-        del user['password']
+        del user['Password']
         session['logged_in'] = True
         session['user'] = user
         return jsonify(user), 200
@@ -14,14 +14,15 @@ class User:
     def signup(self):
         user = {
             "_id": uuid.uuid4().hex,
-            "name": request.form.get('name'),
-            "email": request.form.get('email'),
-            "password": request.form.get('password')
+            "Firstname": request.form.get('fname'),
+            "Lastname": request.form.get('lname'),
+            "Email": request.form.get('email'),
+            "Password": request.form.get('password')
         }
 
-        user['password'] = pbkdf2_sha256.encrypt(user['password'])
+        user['Password'] = pbkdf2_sha256.encrypt(user['Password'])
 
-        if db.db.users.find_one({'email': user['email']}):
+        if db.db.users.find_one({'Email': user['Email']}):
             return jsonify({"error": "Email ID is already in use"}), 400
 
         if db.db.users.insert_one(user):
@@ -35,10 +36,10 @@ class User:
 
     def login(self):
         user = db.db.users.find_one({
-            'email': request.form.get('email')
+            'Email': request.form.get('email')
         })
 
-        if user and pbkdf2_sha256.verify(request.form.get('password'), user['password']):
+        if user and pbkdf2_sha256.verify(request.form.get('password'), user['Password']):
             return self.create_session(user)
 
         return jsonify({"error": "Invalid login credentials"}), 401
