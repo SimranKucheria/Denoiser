@@ -1,12 +1,12 @@
 import warnings
-import tensorflow as tf
-from keras.models import load_model
+#import tensorflow as tf
+#from keras.models import load_model
 from flask import Flask, render_template, redirect, session, request
 from functools import wraps
 from models import User
 import db
-from denoiser import getcleanaudio
-from subprocess import run, PIPE
+#from denoiser import getcleanaudio
+#from subprocess import run, PIPE
 
 
 app = Flask(__name__)
@@ -59,15 +59,15 @@ def recorder():
     return render_template('recorder.html')
 
 
-@app.route('/audio', methods=['POST', 'GET'])
-def audio():
-    if request.method == 'POST':
-        with open('/tmp/audio.wav', 'wb') as f:
-            f.write(request.data)
-        f.close()
-        x=getcleanaudio(model=model, filename='/tmp/audio.wav')
-        print(x)
-        return x
+#@app.route('/audio', methods=['POST', 'GET'])
+#def audio():
+ #   if request.method == 'POST':
+  #      with open('/tmp/audio.wav', 'wb') as f:
+   #         f.write(request.data)
+    #    f.close()
+     #   x=getcleanaudio(model=model, filename='/tmp/audio.wav')
+      #  print(x)
+       # return x
         
 #@app.route('/play')
 #def play():
@@ -80,8 +80,13 @@ def dashboard():
     return render_template('dashboard.html')
 
 
-if __name__ == "__main__":
-    print(("* Loading Keras model and Flask starting server..."
-           "please wait until server has fully started"))
-    load_keras_model()
-    app.run(host="127.0.0.1", port=5000, debug=True)
+@app.route('/news')
+@login_required
+def news():
+    return render_template('news.html')
+
+#if __name__ == "__main__":
+   # print(("* Loading Keras model and Flask starting server..."
+     #      "please wait until server has fully started"))
+   # load_keras_model()
+   # app.run(host="127.0.0.1", port=5000, debug=True)
