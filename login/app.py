@@ -65,13 +65,13 @@ def audio():
         with open('/tmp/audio.wav', 'wb') as f:
             f.write(request.data)
         f.close()
-        x = getcleanaudio(model=model, filename='/tmp/audio.wav')
-        return play()
-
-
-@app.route('/play')
-def play():
-    return render_template('denoiseroutput.html')
+        x=getcleanaudio(model=model, filename='/tmp/audio.wav')
+        print(x)
+        return x
+        
+#@app.route('/play')
+#def play():
+#    return render_template('denoiseroutput.html')
 
 
 @app.route('/dashboard/')

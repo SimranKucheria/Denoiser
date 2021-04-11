@@ -7,7 +7,7 @@ import scipy
 import numpy as np
 import pandas as pd
 import os
-import speech_recognition
+import speech_recognition as sr
 from scipy.io.wavfile import write
 
 
@@ -52,5 +52,16 @@ def getcleanaudio(model, filename):
     # Use speech recognition outputtext=
     print("Processing done")
     path = os.getcwd()
+    outputaud = (np.iinfo(np.int32).max * (outputaud/np.abs(outputaud).max())).astype(np.int32)
+
     write(path+'/static/cleaned.wav', 16000, outputaud)
-    return "/tmp/cleaned.wav"
+    import speech_recognition as sr
+    r = sr.Recognizer()
+    with sr.AudioFile(path+"/static/cleaned.wav") as source:
+    	audio = r.record(source)
+    try:
+    	return r.recognize_google(audio)
+    except sr.UnknownValueError:
+    	return "Could not understand audio"
+    except sr.RequestError as e:
+    	return "Internal error. Try again later"

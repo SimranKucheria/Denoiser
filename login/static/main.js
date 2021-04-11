@@ -14,10 +14,17 @@ var recIndex = 0;
 function gotBuffers(buffers) {
     audioRecorder.exportMonoWAV(doneEncoding);
 }
-
+//function renderoutput(data) {
+  //  fetch('/denoised',{method: "GET"}).then(response => response.blob().
+    //then(data => { document.getElementById('speechtotext').value = data;
+    //}));
+    
 function doneEncoding(soundBlob) {
-    fetch('/audio', {method: "POST", body: soundBlob}).then(response => response.text().then(text => {
+    fetch('/audio', {method: "POST", body: soundBlob})
+    .then(response => response.text()
+    .then(text => {
         document.getElementById('output').value = text;
+        document.getElementById('audiofile').src = "/static/cleaned.wav";
     }));
     recIndex++;
 }
@@ -26,7 +33,7 @@ function stopRecording() {
     // stop recording
     audioRecorder.stop();
     document.getElementById('stop').disabled = true;
-    document.getElementById('start').removeAttribute('disabled');
+    //document.getElementById('start').removeAttribute('disabled');
     audioRecorder.getBuffers(gotBuffers);
 }
 
