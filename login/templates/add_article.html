@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+
+    <h1 class="center">Write an Article</h1>
+<form name="add_article_form">
+    <label for="title">Title</label>
+    {{ form.title() }}
+    <br><br>
+    {{ form.body() }}
+    {{ form.submit() }}
+    <p class="error error--hidden"></p>
+</form>
+</div>
+
+{% endblock %}
