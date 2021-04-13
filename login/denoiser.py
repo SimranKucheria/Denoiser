@@ -9,7 +9,7 @@ import pandas as pd
 import os
 import speech_recognition as sr
 from scipy.io.wavfile import write
-
+i=0
 
 def revert_features_to_audio(features, phase, cleanMean, cleanStd):
     features = cleanStd * features + cleanMean  # Remove standardisation
@@ -24,7 +24,8 @@ def revert_features_to_audio(features, phase, cleanMean, cleanStd):
 
 
 def getcleanaudio(model, filename):
-
+    global i
+    i=i+1
     inputaudio, sr = librosa.load(filename, 16000)
     noise_stft_features = librosa.stft(inputaudio, n_fft=256, win_length=256, hop_length=64, window=scipy.signal.hamming(
         256, sym=False), center=True)  # Get Spectogram from audio
@@ -54,14 +55,15 @@ def getcleanaudio(model, filename):
     path = os.getcwd()
     outputaud = (np.iinfo(np.int32).max * (outputaud/np.abs(outputaud).max())).astype(np.int32)
 
-    write(path+'/static/cleaned.wav', 16000, outputaud)
+    write(path+'/static/cleaned'+str(i)+'.wav', 16000, outputaud)
     import speech_recognition as sr
     r = sr.Recognizer()
-    with sr.AudioFile(path+"/static/cleaned.wav") as source:
+    name=path+'/static/cleaned'+str(i)+'.wav'
+    with sr.AudioFile(path+"/static/cleaned"+str(i)+".wav") as source:
     	audio = r.record(source)
     try:
-    	return r.recognize_google(audio)
+    	return r.recognize_google(audio),name
     except sr.UnknownValueError:
-    	return "Could not understand audio"
+    	return "Could not understand audio. Please try again",name
     except sr.RequestError as e:
-    	return "Internal error. Try again later"
+    	return "Internal error. Try again later",name

@@ -1,12 +1,15 @@
-{% extends "layout.html" %}
+{% extends "base.html" %}
 {% block content %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
     <div class="jumbotron">
         <div class="container">
             <h1>
                 <box-icon type='solid' name='music'></box-icon>
-                Recorder
+                Denoiser
             </h1>
         </div>
     </div>
@@ -21,8 +24,7 @@
         
         <textarea id="output" style="width: 100%;height: 200px" readonly></textarea>
         <div class="container">
-        <audio controls id="audiofile">
-             <! -- <source src="/static/cleaned.wav" type="audio/mpeg">-->
+        <audio id="audiofile" controls >
         </audio>    
     </div>
     </div>

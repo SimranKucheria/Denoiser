@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<form action="http://localhost:5000/blog/write">
+    <input type="submit" value="Write a Post" />
+</form>
 <h1>Articles</h1>
 <ul>
     {% for article in articles %}
