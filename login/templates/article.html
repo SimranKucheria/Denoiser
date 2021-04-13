@@ -7,4 +7,11 @@
   <div>
     {{article.body}}
   </div>
+  {% if user._id == article.user_id %}
+  <form action="http://localhost:5000/delete_article/{{article._id}}" method="post">
+    <input type="submit" value="Delete Article" class="btn">
+  </form>
+  {% else %}
+  <br>
+  {% endif %}
 {% endblock %}

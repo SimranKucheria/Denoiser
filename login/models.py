@@ -73,5 +73,19 @@ class Article:
         return db.db.articles.find()
 
     def get_article(self, id):
-        return db.db.articles.find_one(id) 
-        
+        return db.db.articles.find_one(id)
+
+    def delete_article(self, id, user):
+        article = db.db.articles.find_one(id)
+        if(article['user_id'] == user['_id']):
+            if db.db.articles.delete_one(id):
+                return redirect('/dashboard/')
+        else:
+            return jsonify({"error": "Error while deleting article"}), 400
+
+    def get_user_articles(self, id, user):
+        author = db.db.users.find_one(id)
+        if user['_id'] == author['_id']:
+            return db.db.articles.find({'user_id': id})
+        else:
+            return redirect('/dashboard/')

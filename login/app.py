@@ -62,7 +62,7 @@ def login():
 @login_required
 def recorder():
     return render_template('recorder.html')
-    
+
 
 @app.route('/blog/write')
 @login_required
@@ -75,10 +75,24 @@ def blog_form():
 def about():
     return render_template('about.html')
 
+
 @app.route('/write_article', methods=['POST'])
 @login_required
 def add_article():
     return Article().create_article(session['user'])
+
+
+@app.route('/delete_article/<string:id>', methods=['POST', 'GET', 'DELETE'])
+@login_required
+def delete_article(id):
+    return Article().delete_article(id, session['user'])
+
+
+@app.route('/blog/user_articles/<string:id>', methods=['GET'])
+@login_required
+def get_user_articles(id):
+    articles = Article().get_user_articles(id, session['user'])
+    return render_template('user_articles.html', articles=articles)
 
 
 @app.route('/blog/articles')
@@ -92,8 +106,8 @@ def articles():
 @login_required
 def article(id):
     article = Article().get_article(id)
-    print(article)
-    return render_template('article.html', article=article)
+    user = session['user']
+    return render_template('article.html', article=article, user=user)
 
 
 @app.route('/audio', methods=['POST', 'GET'])
@@ -102,9 +116,9 @@ def audio():
         with open('/tmp/audio.wav', 'wb') as f:
             f.write(request.data)
         f.close()
-        x,y = getcleanaudio(model=model, filename='/tmp/audio.wav')
+        x, y = getcleanaudio(model=model, filename='/tmp/audio.wav')
     print(x)
-    return json_response(text=x,name=y)
+    return json_response(text=x, name=y)
 
 
 @app.route('/dashboard/')
