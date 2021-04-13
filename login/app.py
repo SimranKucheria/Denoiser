@@ -1,7 +1,7 @@
 import warnings
 import tensorflow as tf
 from keras.models import load_model
-from flask import Flask, render_template, redirect, session, request
+from flask import Flask, render_template, redirect, session, request, flash
 from functools import wraps
 from models import User
 from models import BlogArticleForm, Article
@@ -82,10 +82,18 @@ def add_article():
     return Article().create_article(session['user'])
 
 
-@app.route('/delete_article/<string:id>', methods=['POST', 'GET', 'DELETE'])
+@app.route('/delete_article/<string:id>', methods=['POST'])
 @login_required
 def delete_article(id):
-    return Article().delete_article(id, session['user'])
+    article = db.db.articles.find_one(id)
+    user = session['user']
+    if user['_id'] == article['user_id']:
+        db.db.articles.delete_one({"_id": id})
+        flash("Deleted article: "+article['title']+" successfully")
+        return redirect('/dashboard/')
+    else:
+        flash("Could not delete article")
+        return redirect('/dashboard/')
 
 
 @app.route('/blog/user_articles/<string:id>', methods=['GET'])
