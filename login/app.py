@@ -1,11 +1,12 @@
 import warnings
-import tensorflow as tf
-from keras.models import load_model
+#import tensorflow as tf
+#from keras.models import load_model
 from flask import Flask, render_template, redirect, session, request
 from functools import wraps
-from models import User, BlogArticleForm, Article
+from models import User
+#from models import BlogArticleForm, Article
 import db
-from denoiser import getcleanaudio
+#from denoiser import getcleanaudio
 from subprocess import run, PIPE
 
 
@@ -17,10 +18,10 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 warnings.filterwarnings('ignore')
 
 
-def load_keras_model():
-    global model
-    print("Model Loaded")
-    model = load_model('../model3.h5')
+#def load_keras_model():
+ #   global model
+  #  print("Model Loaded")
+   # model = load_model('../model3.h5')
 
 
 def login_required(f):
@@ -83,15 +84,15 @@ def article(id):
     return render_template('article.html', article=article)
 
 
-@app.route('/audio', methods=['POST', 'GET'])
-def audio():
-    if request.method == 'POST':
-        with open('/tmp/audio.wav', 'wb') as f:
-            f.write(request.data)
-        f.close()
-        x = getcleanaudio(model=model, filename='/tmp/audio.wav')
-    print(x)
-    return x
+#@app.route('/audio', methods=['POST', 'GET'])
+#def audio():
+ #   if request.method == 'POST':
+  #      with open('/tmp/audio.wav', 'wb') as f:
+   #         f.write(request.data)
+    #    f.close()
+    #    x = getcleanaudio(model=model, filename='/tmp/audio.wav')
+    #print(x)
+    #return x
 
 
 @app.route('/play')
@@ -111,8 +112,8 @@ def news():
     return render_template('news.html')
 
 
-if __name__ == "__main__":
-    print(("* Loading Keras model and Flask starting server..."
-          "please wait until server has fully started"))
-    load_keras_model()
-    app.run(host="127.0.0.1", port=5000, debug=True)
+#if __name__ == "__main__":
+#    print(("* Loading Keras model and Flask starting server..."
+#          "please wait until server has fully started"))
+#    load_keras_model()
+#    app.run(host="127.0.0.1", port=5000, debug=True)
