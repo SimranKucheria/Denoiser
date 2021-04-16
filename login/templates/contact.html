@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+
+    <h1 class="center">Contact Us</h1>
+<form name="contactus_form" method=POST>
+    {{ form.csrf_token }}
+    <label for="name">Name</label>
+    {{ form.name() }}
+    <label for="email">Email</label>
+    {{ form.email() }}
+    <label for="subject">Subject</label>
+    {{ form.subject() }}
+    <br><br>
+    <label for="message">Message</label>
+    {{ form.message() }}
+    {{ form.submit() }}
+    <p class="error error--hidden"></p>
+</form>
+</div>
+
+{% endblock %}

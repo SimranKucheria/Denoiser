@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+
+    <h1 class="center">Enter New Password</h1>
+<form name="password_form" method=POST>
+    {{ form.csrf_token }}
+    <label for="email">Email</label>
+    {{ form.password() }}
+    <br><br>
+    {{ form.submit() }}
+    <p class="error error--hidden"></p>
+</form>
+</div>
+
+{% endblock %}

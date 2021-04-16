@@ -4,7 +4,9 @@ import db
 import uuid
 from flask_wtf import FlaskForm
 from flask_ckeditor import CKEditorField
-from wtforms import StringField, SubmitField, TextAreaField
+from wtforms import StringField, SubmitField, TextAreaField , PasswordField, TextField
+from wtforms.validators import DataRequired
+from flask_mail import Mail, Message
 
 
 class User:
@@ -46,6 +48,21 @@ class User:
             return self.create_session(user)
 
         return jsonify({"error": "Invalid login credentials"}), 401
+       
+class EmailForm(FlaskForm):
+	email = StringField('Email')
+	submit = SubmitField('Submit')
+
+class PasswordForm(FlaskForm):
+	password =  PasswordField('Password')
+	submit = SubmitField('Submit')
+
+class ContactUsForm(FlaskForm):
+    name = TextField("Name")
+    email = TextField("Email")
+    subject = TextField("Subject")
+    message = TextAreaField("Message")
+    submit = SubmitField("Send")
 
 
 class BlogArticleForm(FlaskForm):
