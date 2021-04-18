@@ -4,7 +4,7 @@ import db
 import uuid
 from flask_wtf import FlaskForm
 from flask_ckeditor import CKEditorField
-from wtforms import StringField, SubmitField, TextAreaField , PasswordField, TextField
+from wtforms import StringField, SubmitField, TextAreaField, PasswordField, TextField
 from wtforms.validators import DataRequired
 from flask_mail import Mail, Message
 
@@ -48,14 +48,17 @@ class User:
             return self.create_session(user)
 
         return jsonify({"error": "Invalid login credentials"}), 401
-       
+
+
 class EmailForm(FlaskForm):
-	email = StringField('Email')
-	submit = SubmitField('Submit')
+    email = StringField('Email')
+    submit = SubmitField('Submit')
+
 
 class PasswordForm(FlaskForm):
-	password =  PasswordField('Password')
-	submit = SubmitField('Submit')
+    password = PasswordField('Password')
+    submit = SubmitField('Submit')
+
 
 class ContactUsForm(FlaskForm):
     name = TextField("Name")
@@ -106,3 +109,26 @@ class Article:
             return db.db.articles.find({'user_id': id})
         else:
             return redirect('/dashboard/')
+
+
+class Comment:
+    def create_comment(self, user, article):
+        comment = {
+            "_id": uuid.uuid4().hex,
+            "commenter_id": user['_id'],
+            "commenter_name": user['Firstname']+' '+user['Lastname'],
+            "article_id": article['_id'],
+            "body": request.form.get('body')
+        }
+        if db.db.comments.insert_one(comment):
+            return jsonify(comment), 200
+        else:
+            return jsonify({"error": "Error while creating comment"}), 400
+
+    def get_comments(self, article):
+        return db.db.comments.find({"article_id": article['_id']})
+
+
+class CommentForm(FlaskForm):
+    body = TextAreaField('Body')
+    submit = SubmitField('Submit')

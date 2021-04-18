@@ -1,17 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>{{article.title}}</h1>
-  <small>Written by {{article.author}}</small>
-  <hr>
-  <div>
-    {{article.body}}
-  </div>
-  {% if user._id == article.user_id %}
-  <form action="http://localhost:5000/delete_article/{{article._id}}" method="post">
-    <input type="submit" value="Delete Article" class="btn">
+<h1>{{article.title}}</h1>
+<small>Written by {{article.author}}</small>
+<hr>
+<div>
+  {{article.body}}
+</div>
+{% if user._id == article.user_id %}
+<form action="http://localhost:5000/delete_article/{{article._id}}" method="post">
+  <input type="submit" value="Delete Article" class="btn">
+</form>
+{% else %}
+<br>
+{% endif %}
+<div>
+  <form name="add_comment_form">
+    {{comment_form.body()}}
+    {{comment_form.submit()}}
   </form>
-  {% else %}
-  <br>
-  {% endif %}
+</div>
+{% if comments %}
+<ul>
+  {% for comment in comments %}
+  <li>{{comment.commenter_name}}<br>{{comment.body}}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
 {% endblock %}
