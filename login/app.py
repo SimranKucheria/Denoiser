@@ -49,9 +49,13 @@ def login_required(f):
 
 @app.route('/')
 def home():
-    if 'logged_in' in session:
-        return redirect('/dashboard/')
-    return render_template('home.html')
+    #if 'logged_in' in session:
+     #   return redirect('/dashboard/')
+    return render_template('dashboard.html')
+    
+@app.route('/gettingstarted')
+def getstarted():
+	return render_template('home.html')
 
 
 @app.route('/forgotpassword', methods=["GET", "POST"])

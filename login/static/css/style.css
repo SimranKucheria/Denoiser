@@ -255,7 +255,7 @@ a {
 .creative_taital{
 	width: 100%;
 	float: left;
-	background-color: #ffffff;
+	background-color : #07283C;
 	height: auto;
 	padding-bottom: 30px;
 	padding-top: 30px;
@@ -266,7 +266,7 @@ a {
 }
 
 .creative_text{
-	color: #050000;
+	color: #ffffff;
 	font-size: 22pt;
 	text-align: center;	
 	border-bottom: 1px solid #000;
@@ -575,7 +575,7 @@ button.main_bt {
 .about_page .creative_taital {
     width: 100%;
     float: left;
-    background-color: #ffffff;
+    background-color: #78909C;"
     height: auto;
     padding-bottom: 30px;
     padding-top: 30px;
