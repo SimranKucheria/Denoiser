@@ -212,7 +212,7 @@ def audio():
             f.write(request.data)
         f.close()
         x, y = getcleanaudio(model=model, filename='/tmp/audio.wav')
-    print(x)
+    print(x,y)
     return json_response(text=x, name=y)
 
 

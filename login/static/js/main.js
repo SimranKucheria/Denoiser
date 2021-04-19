@@ -17,6 +17,7 @@ function gotBuffers(buffers) {
 
 function doneEncoding(soundBlob) {
     // fetch('/audio', {method: "POST", body: soundBlob}).then(response => $('#output').text(response.text()))
+    document.getElementById('coverScreen').style.visibility="visible";
     fetch('/audio', {method: "POST", body: soundBlob}).then(response => response.json().then(text => {
      
         document.getElementById('init').hidden="true";
@@ -25,7 +26,12 @@ function doneEncoding(soundBlob) {
         document.getElementById('analyser').hidden="true";
         document.getElementById('audiofile').src=text["name"];
         document.getElementById('audiofile').type="audio/wav";
+        document.getElementById('header1').style.visibility="visible";
+        document.getElementById('audiocontainer').style.visibility="visible";
+        document.getElementById('output').style.visibility="visible";
         document.getElementById('output').value=text["text"];
+        document.getElementById('header2').style.visibility="visible";
+        document.getElementById('coverScreen').style.visibility="hidden";
     }));
     recIndex++;
 }

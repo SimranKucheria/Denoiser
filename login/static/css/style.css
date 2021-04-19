@@ -204,7 +204,7 @@ a {
 }
 .btn_main{
 	width: 40%;
-    display: block;
+    	display: block;
    	margin: 0 auto;
 	text-align: center;
 }
@@ -255,7 +255,7 @@ a {
 .creative_taital{
 	width: 100%;
 	float: left;
-	background-color : #07283C;
+	background-color : #072833;
 	height: auto;
 	padding-bottom: 30px;
 	padding-top: 30px;
@@ -498,6 +498,29 @@ button.main_bt {
     padding: 20px;
 
 
+}
+.LockOn {
+    display: block;
+    visibility: hidden;
+    position: absolute;
+    z-index: 999;
+    top: 0px;
+    left: 0px;
+    width: 105%;
+    height: 105%;
+    background-color:white;
+    vertical-align:bottom;
+    padding-top: 20%; 
+    filter: alpha(opacity=75); 
+    opacity: 0.75; 
+    font-size:large;
+    color:blue;
+    font-style:italic;
+    font-weight:400;
+    background-image: url("/static/images/loading.gif");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 .button.navbar-toggler.collapsed { background: #fff;}

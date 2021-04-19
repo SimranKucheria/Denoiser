@@ -58,7 +58,7 @@ def getcleanaudio(model, filename):
     write(path+'/static/cleaned'+str(i)+'.wav', 16000, outputaud)
     import speech_recognition as sr
     r = sr.Recognizer()
-    name=path+'/static/cleaned'+str(i)+'.wav'
+    name='/static/cleaned'+str(i)+'.wav'
     with sr.AudioFile(path+"/static/cleaned"+str(i)+".wav") as source:
     	audio = r.record(source)
     try:

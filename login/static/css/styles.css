@@ -66,13 +66,26 @@ p {
 }
 
 .card {
+  padding: 20px 40px;
   margin: 0 30px 60px;
+  width: 460px;
+  box-shadow: 0 8px 26px -4px rgba(0,0,0,0.15);
+  border-radius: 5px;
+  background: var(--white);
+
+}
+
+.cardform{
   padding: 20px 40px;
   width: 460px;
   box-shadow: 0 8px 26px -4px rgba(0,0,0,0.15);
   border-radius: 5px;
   background: var(--white);
-}
+  margin-left: 33%;      
+  margin-right: 33%;
+  margin-top: 5%;
+  width: 460px;
+ }
 
 @media only screen and (max-width: 520px) {
   .card-wrapper {
