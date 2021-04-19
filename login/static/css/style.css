@@ -260,6 +260,7 @@ a {
 	padding-bottom: 30px;
 	padding-top: 30px;
     box-shadow: 0px 0px 10px 0px;
+    border: solid;
     color: #e7e7e7;
     margin-top: -110px;
     margin-bottom: 50px;
@@ -267,13 +268,13 @@ a {
 
 .creative_text{
 	color: #ffffff;
-	font-size: 22pt;
+	font-size: 25pt;
 	text-align: center;	
 	border-bottom: 1px solid #000;
 	width: 46%;
-    margin: 0 auto;
-    text-align: center;
-	font-weight: bold;
+    	margin: 0 auto;
+    	text-align: center;
+	font-family: 'Times New Roman',Times ,serif;
 
 }
 
@@ -305,6 +306,8 @@ a {
 	background-color: #072833;
 	height: auto;
 	padding: 20px;
+	font-family: 'Times New Roman', Times, serif;;
+	
 }
 
 .written_text{
@@ -429,6 +432,15 @@ a {
 	text-align: center;
 }
 
+.displaynews{
+	padding: 20px 40px;
+  border-radius: 5px;
+  margin-left: 27.5%;      
+  margin-right: 27.5%;
+  margin-top: 2.5%;
+  width: 500px;
+}
+	
 .copyright{
 	width: 100%;
 	float: left;
