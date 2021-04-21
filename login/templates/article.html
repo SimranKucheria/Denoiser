@@ -1,12 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{article.title}}</h1>
-<small>Written by {{article.author}}</small>
+<div style="padding: 30px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 50px;">
+  {{article.title}}
+</div>
+<div style="padding: 5px;
+    text-align: center;
+    background: #1abcb4;
+    color: white;
+    font-size: 12px;">
+  Written by {{article.author}}
+</div>
 <hr>
-<div>
+<div class="blog-card">
   {{article.body}}
 </div>
+<hr>
 {% if user._id == article.user_id %}
 <form action="http://localhost:5000/delete_article/{{article._id}}" method="post">
   <input type="submit" value="Delete Article" class="btn">
@@ -14,18 +27,27 @@
 {% else %}
 <br>
 {% endif %}
-<div>
+
+{% if comments %}
+<h1>Comments</h1>
+<div class="comment-card-wrapper" style="justify-content: left;">
+  <ul>
+    {% for comment in comments %}
+    <li>
+      <div class="comment-card"><small>{{comment.commenter_name}}</small>
+        <hr>{{comment.body}}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+<div class="comment-cardform">
   <form name="add_comment_form">
-    {{comment_form.body()}}
-    {{comment_form.submit()}}
+    <label for="body">Add Comment</label>
+    {{comment_form.body(class="comment-field")}}
+    {{comment_form.submit(class="btn")}}
   </form>
 </div>
-{% if comments %}
-<ul>
-  {% for comment in comments %}
-  <li>{{comment.commenter_name}}<br>{{comment.body}}</li>
-  {% endfor %}
-</ul>
-{% endif %}
 
 {% endblock %}

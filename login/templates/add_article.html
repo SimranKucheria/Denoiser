@@ -1,18 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div style="padding: 30px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 50px;">
+    Write an Article
+</div>
+<br>
+<br>
+<div class="article-cardform">
 
-<div class="cardform">
-
-    <h1 class="center">Write an Article</h1>
-<form name="add_article_form">
-    <label for="title">Title</label>
-    {{ form.title() }}
-    <br><br>
-    {{ form.body() }}
-    {{ form.submit() }}
-    <p class="error error--hidden"></p>
-</form>
+    <form name="add_article_form">
+        <label for="title">Title</label>
+        {{ form.title(class="title-field") }}
+        <br><br>
+        <label for="body">Body</label>
+        {{ form.body(class="blog-field") }}
+        {{ form.submit(class="btn") }}
+        <p class="error error--hidden"></p>
+    </form>
 </div>
 
 {% endblock %}

@@ -1,13 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action="http://localhost:5000/blog/write">
-    <input type="submit" value="Write a Post" />
-</form>
-<h1>Articles</h1>
-<ul>
-    {% for article in articles %}
-    <li><a href="articles/{{article._id}}">{{article.title}}</a></li>
-    {% endfor %}
-</ul>
+<div style="padding: 30px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 50px;">
+    Articles
+</div>
+<div class="card-wrapper">
+    <ul>
+        {% for article in articles %}
+        <li>
+            <div class="article-card">
+                <a style="display: block; color: black;" href="articles/{{article._id}}">{{article.title}}</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div style="display: flex; justify-content: center;">
+    <div class="btn">
+        <a href="http://localhost:5000/blog/write">Write a Post</a>
+    </div>
+</div>
 {% endblock %}
