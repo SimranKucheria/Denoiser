@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, session, redirect
+from flask import Flask, jsonify, request, session, redirect, flash
 from passlib.hash import pbkdf2_sha256
 import db
 import uuid
@@ -7,6 +7,7 @@ from flask_ckeditor import CKEditorField
 from wtforms import StringField, SubmitField, TextAreaField, PasswordField, TextField
 from wtforms.validators import DataRequired
 from flask_mail import Mail, Message
+from datetime import date, datetime
 
 
 class User:
@@ -37,6 +38,7 @@ class User:
 
     def signout(self):
         session.clear()
+        flash('You have logged out successfully')
         return redirect('/')
 
     def login(self):
@@ -81,7 +83,8 @@ class Article:
             "author": user["Firstname"] + ' ' + user["Lastname"],
             "user_id": user["_id"],
             "title": request.form.get("title"),
-            "body": request.form.get("body")
+            "body": request.form.get("body"),
+            "time": str(date.today().strftime("%B %d, %Y"))
         }
 
         if db.db.articles.insert_one(article):
@@ -118,7 +121,8 @@ class Comment:
             "commenter_id": user['_id'],
             "commenter_name": user['Firstname']+' '+user['Lastname'],
             "article_id": article['_id'],
-            "body": request.form.get('body')
+            "body": request.form.get('body'),
+            "time": datetime.now().strftime("%d/%m/%Y %H:%M")
         }
         if db.db.comments.insert_one(comment):
             return jsonify(comment), 200

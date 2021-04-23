@@ -49,13 +49,14 @@ def login_required(f):
 
 @app.route('/')
 def home():
-    #if 'logged_in' in session:
-     #   return redirect('/dashboard/')
     return render_template('dashboard.html')
-    
+
+
 @app.route('/gettingstarted')
 def getstarted():
-	return render_template('home.html')
+    if 'logged_in' in session:
+        return redirect('/')
+    return render_template('home.html')
 
 
 @app.route('/forgotpassword', methods=["GET", "POST"])
@@ -128,11 +129,16 @@ def signup():
 
 @app.route('/user/signout', methods=['GET', 'POST'])
 def signout():
-    return User().signout()
+    if 'logged_in' in session:
+        return User().signout()
+    else:
+        flash("You are not logged in!")
+        return redirect('/')
 
 
 @app.route('/user/login', methods=['POST'])
 def login():
+    flash('Successfully logged in')
     return User().login()
 
 
@@ -212,7 +218,7 @@ def audio():
             f.write(request.data)
         f.close()
         x, y = getcleanaudio(model=model, filename='/tmp/audio.wav')
-    print(x,y)
+    print(x, y)
     return json_response(text=x, name=y)
 
 
