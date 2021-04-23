@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+
+.priya{
+  background-color: #C5EEF3;
+}
+
+</style>
+
+
+<!-- Header -->
+
+<header class="w3-container w3-center priya" style="padding:128px 16px">
+  <h1 class="w3-margin w3-jumbo">HELP!</h1>
+  <p class="w3-xlarge">A guide on using our website</p>
+</header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1>Denoiser</h1>
+      <h5 class="w3-padding-32"> Simply click on "Start Listening" and "Start" and start speaking into your mic. After you are done, click on "Stop". You will see a loading page that will eventually show you a text trascription of your audio. This works similar to how you would speak into Alexa or Google Assistant, however, we denoise the audio, so regardless of how much background audio you have in your surroundings, our speech to text module will be able to listen to you! </h5>
+
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Second Grid -->
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+  <div class="w3-content">
+
+    <div class="w3-twothird">
+      <h1>News and Blogs</h1>
+      <h5 class="w3-padding-32">We believe in communities. We have created a special news feed for you to keep up to date with latest advances and blogs! Simply navigate to the news section and click on your favorite links (these will refresh every so often to provide you with a holistic experience!). Moreover, we also have a blog so you can interact with thousands around you. Simply navigate to blog- here you can write your own blog, comment on other's blogs and even delete your blogs if it doesn't do as well as you thought:) </h5>
+
+
+    </div>
+  </div>
+</div>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1>Log in</h1>
+      <h5 class="w3-padding-32"> You can make the most of our website through logging in. On the home page, click on "Get Started" and sign up for an account. After that you may log in using your credentials. If you were to forget your credentials, simply click on "Forgot password" and we'll send you an email with your log in details!
+ </h5>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Fourth Grid -->
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+  <div class="w3-content">
+
+
+    <div class="w3-twothird">
+      <h1>Contact Us!</h1>
+      <h5 class="w3-padding-32">We are always excited to hear from you! Simply head over to "Contact Us" to send us feedback, get in touch with us, or report any anomalies.   </h5>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <h1 class="w3-margin w3-xlarge">Made for you, with love</h1>
+</div>
+
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+
+
+
+{% endblock %}
