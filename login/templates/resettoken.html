@@ -7,7 +7,7 @@
     <h1 class="center">Enter New Password</h1>
 <form name="password_form" method=POST>
     {{ form.csrf_token }}
-    <label for="email">Email</label>
+    <label for="password">New Password</label>
     {{ form.password() }}
     <br><br>
     {{ form.submit() }}
