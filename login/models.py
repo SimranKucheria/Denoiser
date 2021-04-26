@@ -4,7 +4,7 @@ import db
 import uuid
 from flask_wtf import FlaskForm
 from flask_ckeditor import CKEditorField
-from wtforms import StringField, SubmitField, TextAreaField, PasswordField, TextField
+from wtforms import StringField, SubmitField, TextAreaField, PasswordField, TextField, validators
 from wtforms.validators import DataRequired
 from flask_mail import Mail, Message
 from datetime import date, datetime
@@ -71,8 +71,10 @@ class ContactUsForm(FlaskForm):
 
 
 class BlogArticleForm(FlaskForm):
-    title = StringField('Title')
-    body = TextAreaField('Body')
+    title = StringField(
+        'Title', [validators.InputRequired(message="Please enter a title")])
+    body = TextAreaField(
+        'Body', [validators.InputRequired(message="Please enter a body")])
     submit = SubmitField('Submit')
 
 
