@@ -55,15 +55,6 @@ function startRecording() {
     audioRecorder.record();
 }
 
-function convertToMono(input) {
-    var splitter = audioContext.createChannelSplitter(2);
-    var merger = audioContext.createChannelMerger(2);
-
-    input.connect(splitter);
-    splitter.connect(merger, 0, 0);
-    splitter.connect(merger, 0, 1);
-    return merger;
-}
 
 function cancelAnalyserUpdates() {
     window.cancelAnimationFrame(rafID);
@@ -109,22 +100,7 @@ function updateAnalysers(time) {
     rafID = window.requestAnimationFrame(updateAnalysers);
 }
 
-function toggleMono() {
-    if (audioInput != realAudioInput) {
-        audioInput.disconnect();
-        realAudioInput.disconnect();
-        audioInput = realAudioInput;
-    } else {
-        realAudioInput.disconnect();
-        audioInput = convertToMono(realAudioInput);
-    }
-
-    audioInput.connect(inputPoint);
-}
-
 function gotStream(stream) {
-    document.getElementById('start').removeAttribute('disabled');
-
     inputPoint = audioContext.createGain();
 
     // Create an AudioNode from the stream.
@@ -176,6 +152,7 @@ window.addEventListener('load', initAudio);
 
 function unpause() {
     document.getElementById('init').style.display = 'none';
+    document.getElementById('start').removeAttribute('disabled')
     audioContext.resume().then(() => {
         console.log('Playback resumed successfully');
     });
